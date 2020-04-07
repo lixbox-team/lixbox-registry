@@ -1,0 +1,53 @@
+{
+	"registry": {
+		"application": {
+			"copyright": "Copyright 2018 - {0} créé par Lixbox team",
+			"menu": {
+				"registry": "Annuaire de services",
+				"settings": "Configuration"
+			},
+			"title": "Lixbox registry"
+		},
+		"service": {
+			"action": {
+				"add": {
+					"text": "Ajouter un service"
+				},
+				"search": {
+					"placeholder": "Chercher un service"
+				}
+			},
+			"dialog": {
+				"entry": {
+					"delete": {
+						"text": "Êtes vous vraiment sur?",
+						"title": "Suppression du service {0}"
+					},
+					"uri": {
+						"delete": {
+							"text": "Etes vous vraiment sur?",
+							"title": "Suppression d'une instance du service {0}"
+						}
+					}
+				}
+			},
+			"entry": {
+				"name": "Nom du service",
+				"uris": "Instances actives",
+				"version": "Version"
+			},
+			"select": "Choisissez un service",
+			"ui": {
+				"button": {
+					"entry": {
+						"del": "Supprimer ce service",
+						"save": "Enregistrer ce service",
+						"uri": {
+							"add": "Ajouter une instance"
+						}
+					}
+				}
+			}
+		}
+	}
+}

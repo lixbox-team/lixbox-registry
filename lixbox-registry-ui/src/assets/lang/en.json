@@ -1,0 +1,53 @@
+{
+	"registry": {
+		"application": {
+			"copyright": "Copyright 2018 - {0} designed by Lixbox team",
+			"menu": {
+				"registry": "Services Registry ",
+				"settings": "Settings"
+			},
+			"title": "Lixbox registry"
+		},
+		"service": {
+			"action": {
+				"add": {
+					"text": "Add a service"
+				},
+				"search": {
+					"placeholder": "Search a service"
+				}
+			},
+			"dialog": {
+				"entry": {
+					"delete": {
+						"text": "Are you sure?",
+						"title": "Delete service {0}"
+					},
+					"uri": {
+						"delete": {
+							"text": "Are you sure?",
+							"title": "Delete instance of service {0}"
+						}
+					}
+				}
+			},
+			"entry": {
+				"name": "Service name",
+				"uris": "Actives Endpoints",
+				"version": "Version"
+			},
+			"select": "Select a service",
+			"ui": {
+				"button": {
+					"entry": {
+						"del": "Remove this service",
+						"save": "Save this service",
+						"uri": {
+							"add": "Add an instance"
+						}
+					}
+				}
+			}
+		}
+	}
+}

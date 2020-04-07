@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions
+  xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+  <suppress>
+    <notes><![CDATA[
+      file name: quarkus-netty-1.2.0.Final.jar
+      ]]></notes>
+    <gav regex="true">^io\.quarkus:quarkus-netty:.*$</gav>
+    <cve>CVE-2014-3488</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: json-patch-1.9.jar
+   ]]></notes>
+    <gav regex="true">^com\.github\.fge:json-patch:.*$</gav>
+    <cpe>cpe:/a:json-patch_project:json-patch</cpe>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: quarkus-netty-1.2.0.Final.jar
+   ]]></notes>
+    <gav regex="true">^io\.quarkus:quarkus-netty:.*$</gav>
+    <cve>CVE-2015-2156</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: quarkus-arc-1.2.0.Final.jar
+   ]]></notes>
+    <gav regex="true">^io\.quarkus:quarkus-arc:.*$</gav>
+    <cve>CVE-2005-2945</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: quarkus-arc-1.2.0.Final.jar
+   ]]></notes>
+    <gav regex="true">^io\.quarkus:quarkus-arc:.*$</gav>
+    <cve>CVE-2005-2992</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: arc-1.2.0.Final.jar
+   ]]></notes>
+    <gav regex="true">^io\.quarkus\.arc:arc:.*$</gav>
+    <cve>CVE-2005-2945</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: arc-1.2.0.Final.jar
+   ]]></notes>
+    <gav regex="true">^io\.quarkus\.arc:arc:.*$</gav>
+    <cve>CVE-2005-2992</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: javax.el-api-3.0.0.jar
+   ]]></notes>
+    <gav regex="true">^javax\.el:javax\.el-api:.*$</gav>
+    <cpe>cpe:/a:oracle:glassfish</cpe>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: javax.el-api-3.0.0.jar
+   ]]></notes>
+    <gav regex="true">^javax\.el:javax\.el-api:.*$</gav>
+    <cve>CVE-2013-2566</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[
+   file name: javax.el-api-3.0.0.jar
+   ]]></notes>
+    <gav regex="true">^javax\.el:javax\.el-api:.*$</gav>
+    <cve>CVE-2015-2808</cve>
+  </suppress>
+</suppressions>

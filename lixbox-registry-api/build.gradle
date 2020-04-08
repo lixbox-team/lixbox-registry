@@ -73,6 +73,7 @@ project(":lixbox-registry-api"){
 
     test {
       useJUnitPlatform()
+      environment "REGISTRY_REDIS_URI", "tcp://main.host:6379"
     }
 
     

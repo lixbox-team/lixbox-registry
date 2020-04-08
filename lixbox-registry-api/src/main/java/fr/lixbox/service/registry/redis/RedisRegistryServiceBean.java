@@ -103,8 +103,7 @@ public class RedisRegistryServiceBean implements RegistryService
         }
         catch (Exception e)
         {
-            LOG.fatal(e.getMessage());
-            LOG.debug(e);
+            LOG.fatal(e,e);
             LOG.error("LE SERVICE REDIS "+redisUri+" N'EST PAS DISPONIBLE");
             status.put("REDIS", "LE SERVICE REDIS "+redisUri+" N'EST PAS DISPONIBLE");
             if (redisClient!=null && redisClient.isConnected())

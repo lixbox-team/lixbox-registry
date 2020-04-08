@@ -57,6 +57,7 @@ import redis.clients.jedis.Jedis;
 @Consumes({"application/json"})
 public class RedisRegistryServiceBean implements RegistryService
 {
+    private static final String SERVICE_REDIS_TEXT = "LE SERVICE REDIS ";
     // ----------- Attribut(s) -----------   
     private static final long serialVersionUID = 1201703311339L;
     private static final Log LOG = LogFactory.getLog(RegistryService.class);
@@ -94,7 +95,7 @@ public class RedisRegistryServiceBean implements RegistryService
                 redisClient = new Jedis(hostName, Integer.parseInt(port));
                 redisClient.ping();
                 redisClient.close();
-                LOG.debug("LE SERVICE REDIS "+redisUri+" EST DISPONIBLE");
+                LOG.debug(SERVICE_REDIS_TEXT+redisUri+" EST DISPONIBLE");
             }
             else
             {
@@ -104,8 +105,8 @@ public class RedisRegistryServiceBean implements RegistryService
         catch (Exception e)
         {
             LOG.fatal(e,e);
-            LOG.error("LE SERVICE REDIS "+redisUri+" N'EST PAS DISPONIBLE");
-            status.put("REDIS", "LE SERVICE REDIS "+redisUri+" N'EST PAS DISPONIBLE");
+            LOG.error(SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE");
+            status.put("REDIS", SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE");
             if (redisClient!=null && redisClient.isConnected())
             {
                 redisClient.close();

@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import fr.lixbox.io.json.JsonUtil;
@@ -33,6 +35,7 @@ import fr.lixbox.io.json.JsonUtil;
 public class ConfigurationServlet extends HttpServlet 
 {
     private static final long serialVersionUID = 3009650591589313586L;
+    private static final Log LOG = LogFactory.getLog(ConfigurationServlet.class);
     
     
     @ConfigProperty(name="registry.api.url")     
@@ -43,11 +46,18 @@ public class ConfigurationServlet extends HttpServlet
     
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     {
         Map<String,String> config = new HashMap<>();
         config.put("registry", registryApi);
         config.put("iam", iamApi);
-        response.getWriter().print(JsonUtil.transformObjectToJson(config,false));
+        try
+        {
+            response.getWriter().print(JsonUtil.transformObjectToJson(config,false));
+        }
+        catch (IOException e)
+        {
+            LOG.fatal(e,e);
+        }
     }
 }

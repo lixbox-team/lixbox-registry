@@ -36,12 +36,6 @@ public class RegistryServiceApp extends Application
     
     
     // ----------- Methode(s) -----------
-    public RegistryServiceApp() 
-    {
-    }
-
-    
-    
     @Override
     public Set<Object> getSingletons() 
     {

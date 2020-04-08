@@ -116,8 +116,6 @@ project(':lixbox-registry-ui'){
     }
     task buildProjectImages(type: DockerBuildImage, group: "docker", description: "build project images") {
         dependsOn createDockerfile
-        buildArgs.put("APP_VERSION","$project.version")
-        buildArgs.put("GRAYLOG_ENV","$config.desc_project.artefact.project")
         images.add("${config.desc_project.artefact.dockerImageKey}/${project.name}:$project.version")
         images.add("${config.desc_project.artefact.dockerImageKey}/${project.name}:latest")
     }

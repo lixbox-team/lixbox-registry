@@ -40,9 +40,8 @@ public class RegistryServiceApiTest
     public final void test_checkHealth()
     {        
         given()
-          .when().get("/registry/api/1.0/checkHealth")
+          .when().get("/registry/api/1.0/health")
           .then()
-            .statusCode(200)
-            .body(is("true"));
+            .statusCode(200);
     }
 }

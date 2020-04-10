@@ -32,9 +32,15 @@
 				}
 			},
 			"entry": {
+				"endpoint": "Endpoint URI",
 				"name": "Nom du service",
+				"type": "Type de service",
 				"uris": "Instances actives",
 				"version": "Version"
+			},
+			"instance": {
+				"bilan": "Bilan de santé",
+				"uri": "Instance URI"
 			},
 			"select": "Choisissez un service",
 			"ui": {

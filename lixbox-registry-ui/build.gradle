@@ -129,4 +129,5 @@ project(':lixbox-registry-ui'){
     }
     pushProjectImages.dependsOn buildProjectImages
     buildAndPushDockerImages.dependsOn pushProjectImages
+    tasks.clean.dependsOn tasks.npmInstall
 }

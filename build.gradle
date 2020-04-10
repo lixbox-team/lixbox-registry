@@ -443,7 +443,7 @@ subprojects {
         tasks.publish.finalizedBy(tagRelease);
     }
     
-    tasks.eclipse.dependsOn tasks.cleanEclipse    
+    tasks.eclipse.dependsOn tasks.cleanEclipse
     tasks.check.dependsOn(tasks.generateLicenseReport);
     tasks.check.dependsOn(tasks.dependencyCheckAnalyze);
 }

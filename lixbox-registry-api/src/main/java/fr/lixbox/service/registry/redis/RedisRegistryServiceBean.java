@@ -15,13 +15,10 @@
  ******************************************************************************/
 package fr.lixbox.service.registry.redis;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,16 +31,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import fr.lixbox.common.exceptions.ProcessusException;
 import fr.lixbox.common.util.CodeVersionUtil;
 import fr.lixbox.common.util.CollectionUtil;
 import fr.lixbox.common.util.StringUtil;
 import fr.lixbox.io.json.JsonUtil;
+import fr.lixbox.service.common.util.ServiceUtil;
 import fr.lixbox.service.registry.RegistryService;
 import fr.lixbox.service.registry.model.ServiceEntry;
+import fr.lixbox.service.registry.model.ServiceInstance;
+import fr.lixbox.service.registry.model.health.Check;
+import fr.lixbox.service.registry.model.health.ServiceState;
+import fr.lixbox.service.registry.model.health.ServiceStatus;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -51,7 +52,7 @@ import redis.clients.jedis.Jedis;
  * 
  * @author ludovic.terral
  */
-@RequestScoped
+@ApplicationScoped
 @Path(RegistryService.SERVICE_URI)
 @Produces({"application/json"})
 @Consumes({"application/json"})
@@ -76,56 +77,59 @@ public class RedisRegistryServiceBean implements RegistryService
 
 
     @Override
-    public boolean checkHealth()
+    public ServiceState checkHealth() 
+    {
+        return checkReady();
+    }
+
+    
+    
+    @Override
+    public ServiceState checkReady()
     {
         LOG.info("redis uri: "+redisUri);
         LOG.debug("Check Health started");
-        boolean health = true;
-        Map<String,String> status = new HashMap<>();
-        
+        ServiceState state = new ServiceState();
         
         //controle de redis
-        Jedis redisClient=null;
-        try
-        {
-            if (!StringUtil.isEmpty(redisUri))
-            {            
-                String hostName = redisUri.substring(6,redisUri.lastIndexOf(':'));
-                String port = redisUri.substring(redisUri.lastIndexOf(':')+1);
-                redisClient = new Jedis(hostName, Integer.parseInt(port));
+        if (!StringUtil.isEmpty(redisUri))
+        { 
+            String hostName = redisUri.substring(6,redisUri.lastIndexOf(':'));
+            String port = redisUri.substring(redisUri.lastIndexOf(':')+1);
+            try (
+                Jedis redisClient = new Jedis(hostName, Integer.parseInt(port));
+            )
+            {           
                 redisClient.ping();
-                redisClient.close();
+                state.setStatus(ServiceStatus.UP);
                 LOG.debug(SERVICE_REDIS_TEXT+redisUri+" EST DISPONIBLE");
             }
-            else
+            catch (Exception e)
             {
-                throw new ProcessusException("IMPOSSIBLE DE TROUVER LE SERVICE REDIS");
+                LOG.fatal(e,e);
+                LOG.error(SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE");
+                state.setStatus(ServiceStatus.DOWN);
+                state.getChecks().add(new Check(ServiceStatus.DOWN, SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE"));
             }
         }
-        catch (Exception e)
+        else
         {
-            LOG.fatal(e,e);
-            LOG.error(SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE");
-            status.put("REDIS", SERVICE_REDIS_TEXT+redisUri+" N'EST PAS DISPONIBLE");
-            if (redisClient!=null && redisClient.isConnected())
-            {
-                redisClient.close();
-            }
-            health=false;
+            state.setStatus(ServiceStatus.DOWN);
+            state.getChecks().add(new Check(ServiceStatus.DOWN, "IMPOSSIBLE DE TROUVER LE SERVICE REDIS"));
         }
-        finally {
-            if (redisClient!=null && redisClient.isConnected())
-            {
-                redisClient.close();
-            }
-        }
-        
         LOG.debug("Check Health finished");
-        if (!health)
+        if (state.getStatus().equals(ServiceStatus.DOWN))
         {
-            throw new ProcessusException("LE SERVICE REGISTRY EST INDISPONIBLE. "+ JsonUtil.transformObjectToJson(status, true));
+            throw new ProcessusException(state.toString());
         }
-        return health;
+        return state;
+    }
+    
+    
+    
+    @Override public ServiceState checkLive() 
+    {
+        return new ServiceState(ServiceStatus.UP);
     }
 
 
@@ -141,27 +145,26 @@ public class RedisRegistryServiceBean implements RegistryService
     @Override
     public boolean registerService(String name,  String version,  String uri)
     {
-        Jedis redisClient = getRedisClient();
         boolean result = false;
-        if (redisClient==null || StringUtil.isEmpty(name) || StringUtil.isEmpty(version) || StringUtil.isEmpty(uri))
-        {
-            return result;
-        }       
-        
-        try
-        {        
-            ServiceEntry serviceEntry = jsonToServiceEntry(redisClient.get(HEAD_KEYS+name+":"+version));
+        try(
+            Jedis redisClient = getRedisClient();
+        )        
+        {  
+            if (redisClient==null || StringUtil.isEmpty(name) || StringUtil.isEmpty(version) || StringUtil.isEmpty(uri))
+            {
+                return result;
+            }       
+            ServiceEntry serviceEntry = JsonUtil.transformJsonToObject(redisClient.get(HEAD_KEYS+name+":"+version), new TypeReference<ServiceEntry>(){});
             if (serviceEntry == null)
             {
                 serviceEntry = new ServiceEntry();
                 serviceEntry.setName(name);
                 serviceEntry.setVersion(version);
             }
-            if (!serviceEntry.getUris().contains(uri))
+            if (!serviceEntry.containsInstanceUri(uri))
             {
-                serviceEntry.getUris().add(uri);
-                redisClient.set(HEAD_KEYS+name+":"+version, serviceEntryToJson(serviceEntry));       
-                
+                serviceEntry.getInstances().add(new ServiceInstance(uri));
+                redisClient.set(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry,false));       
             }            
             result = true;
         }
@@ -170,7 +173,6 @@ public class RedisRegistryServiceBean implements RegistryService
             LOG.error(e);
             LOG.debug(e.getMessage());
         }
-        redisClient.close();
         return result;
     }
 
@@ -179,29 +181,29 @@ public class RedisRegistryServiceBean implements RegistryService
     @Override
     public boolean unregisterService(String name, String version, String uri)
     {  
-        Jedis redisClient = getRedisClient();
         boolean result = false;
-        if (redisClient==null || StringUtil.isEmpty(name) || StringUtil.isEmpty(version) || StringUtil.isEmpty(uri))
-        {
-            return result;
-        }       
-        
-        try
-        {      
-            ServiceEntry serviceEntry = jsonToServiceEntry(redisClient.get(HEAD_KEYS+name+":"+version));
+        try(
+            Jedis redisClient = getRedisClient();
+        )        
+        {  
+            if (redisClient==null || StringUtil.isEmpty(name) || StringUtil.isEmpty(version) || StringUtil.isEmpty(uri))
+            {
+                return result;
+            }       
+            ServiceEntry serviceEntry = JsonUtil.transformJsonToObject(redisClient.get(HEAD_KEYS+name+":"+version), new TypeReference<ServiceEntry>(){});
             if (serviceEntry!=null)
             {
-                if (!CollectionUtil.isEmpty(serviceEntry.getUris()) && serviceEntry.getUris().contains(uri))
+                if (serviceEntry.containsInstanceUri(uri))
                 {
-                    serviceEntry.getUris().remove(uri);            
+                    serviceEntry.getInstances().remove(serviceEntry.getInstanceByUri(uri));            
                 }                
-                if (serviceEntry.getUris().isEmpty())
+                if (serviceEntry.getInstances().isEmpty())
                 {
                     redisClient.del(HEAD_KEYS+name+":"+version);
                 }
                 else
                 {            
-                    redisClient.set(HEAD_KEYS+name+":"+version, serviceEntryToJson(serviceEntry));   
+                    redisClient.set(HEAD_KEYS+name+":"+version, serviceEntry.toString());   
                 }
                 result = true;
             }
@@ -211,7 +213,6 @@ public class RedisRegistryServiceBean implements RegistryService
             LOG.error(e);
             LOG.debug(e.getMessage());
         }
-        redisClient.close();
         return result;
     }
 
@@ -232,7 +233,7 @@ public class RedisRegistryServiceBean implements RegistryService
         {      
             if (!CollectionUtil.isEmpty(redisClient.keys(HEAD_KEYS+name+":"+version)))
             {
-                result = jsonToServiceEntry(redisClient.get(HEAD_KEYS+name+":"+version));         
+                result = JsonUtil.transformJsonToObject(redisClient.get(HEAD_KEYS+name+":"+version), new TypeReference<ServiceEntry>(){});         
             }
             else
             {
@@ -264,7 +265,7 @@ public class RedisRegistryServiceBean implements RegistryService
 		{
 		    for(String key : redisClient.keys((HEAD_KEYS+name+"*")))
 		    {
-		        entries.add(jsonToServiceEntry(redisClient.get(key)));
+		        entries.add(JsonUtil.transformJsonToObject(redisClient.get(key), new TypeReference<ServiceEntry>(){}));
 		    }
 		}
         catch (Exception e)
@@ -295,7 +296,7 @@ public class RedisRegistryServiceBean implements RegistryService
         {
             for(String key : redisClient.keys((HEAD_KEYS+"*")))
             {
-                entries.add(jsonToServiceEntry(redisClient.get(key)));
+                entries.add(JsonUtil.transformJsonToObject(redisClient.get(key), new TypeReference<ServiceEntry>(){}));
             }
         }
         catch (Exception e)
@@ -326,22 +327,22 @@ public class RedisRegistryServiceBean implements RegistryService
     @Path("/entry/sync")
     public ServiceEntry synchronizeEntry(ServiceEntry entry) 
     {
-        Jedis redisClient = getRedisClient();
-        if (redisClient==null || entry==null)
-        {
-            return entry;
-        }       
-        
-        try
-        {        
-            redisClient.set(HEAD_KEYS+entry.getName()+":"+entry.getVersion(), serviceEntryToJson(entry));
+        try(            
+            Jedis redisClient = getRedisClient();
+        )
+        {     
+            if (redisClient==null || entry==null)
+            {
+                return entry;
+            }       
+            checkEntry(entry);
+            redisClient.set(HEAD_KEYS+entry.getName()+":"+entry.getVersion(), JsonUtil.transformObjectToJson(entry,false));
         }
         catch (Exception e)
         {
             LOG.error(e);
             LOG.debug(e.getMessage());
         }
-        redisClient.close();
         return entry;
     }
 
@@ -360,10 +361,10 @@ public class RedisRegistryServiceBean implements RegistryService
         
         try
         {        
-            ServiceEntry serviceEntry = jsonToServiceEntry(redisClient.get(HEAD_KEYS+name+":"+version));
+            ServiceEntry serviceEntry = JsonUtil.transformJsonToObject(redisClient.get(HEAD_KEYS+name+":"+version), new TypeReference<ServiceEntry>(){});
             if (serviceEntry != null)
             {
-                result = redisClient.del(HEAD_KEYS+name+":"+version, serviceEntryToJson(serviceEntry))>0;
+                result = redisClient.del(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry, false))>0;
             }            
         }
         catch (Exception e)
@@ -374,44 +375,6 @@ public class RedisRegistryServiceBean implements RegistryService
         redisClient.close();
         return result;
     }
-    
-    
-    private ServiceEntry jsonToServiceEntry(String content) throws IOException
-    {
-        ServiceEntry result = null;
-        ObjectMapper mapper = new ObjectMapper();
-        if (!StringUtil.isEmpty(content))
-        {
-            try 
-            {
-                result = mapper.readValue(content, ServiceEntry.class);
-            } 
-            catch (JsonProcessingException e) 
-            {
-                LOG.error(e);
-                LOG.debug(e.getMessage());
-            }
-        }
-        return result;
-    }
-
-    
-    
-    private String serviceEntryToJson(ServiceEntry content) throws IOException
-    {
-        String result = "Content error";
-        ObjectMapper mapper = new ObjectMapper();
-        try 
-        {
-            result = mapper.writeValueAsString(content);
-        } 
-        catch (JsonProcessingException e) 
-        {
-            LOG.error(e);
-        }
-        return result;
-    }
-    
     
     
     private Jedis getRedisClient()
@@ -426,4 +389,16 @@ public class RedisRegistryServiceBean implements RegistryService
         }
         return redisClient;
     }    
+    
+    
+    private void checkEntry(ServiceEntry entry)
+    {
+        for (ServiceInstance servInst:entry.getInstances())
+        {
+            servInst.setLiveState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));
+            servInst.setReadyState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));
+            servInst.setReady(ServiceStatus.UP.equals(servInst.getReadyState().getStatus()));
+            servInst.setLive(ServiceStatus.UP.equals(servInst.getLiveState().getStatus()));
+        }
+    }
 }

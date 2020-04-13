@@ -95,19 +95,6 @@ node('slave-gradle-graalvm') {
         echo 'Project site finished'
     }
     
-    stage('Build Native App'){
-        echo 'Build Native App started'
-        try{
-            sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew buildNative --stacktrace'            
-        }
-        catch (e){
-            sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew site uploadSite --stacktrace'
-            onFailed(e);
-            error e
-        }
-        echo 'Build Native App finished'
-    }
-    
     stage('Distribution for production'){
         echo 'Distribution for production started'
         retry(2){ 

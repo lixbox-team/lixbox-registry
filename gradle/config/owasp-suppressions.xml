@@ -160,10 +160,10 @@
 </suppress>
 <suppress>
    <notes><![CDATA[
-   file name: acorn:6.4.0
+   file name: acorn:6.4.1
    ]]></notes>
    <packageUrl regex="true">^pkg:npm/acorn@.*$</packageUrl>
-   <vulnerabilityName>1488</vulnerabilityName>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
 </suppress>
 <suppress>
    <notes><![CDATA[
@@ -199,6 +199,104 @@
    ]]></notes>
    <packageUrl regex="true">^pkg:npm/yargs@.*$</packageUrl>
    <vulnerabilityName>CVE-2020-7608</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: braces:"3.0.2"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/braces@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: debug:"2.6.9"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/debug@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: kind-of:"5.1.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/kind\-of@.*$</packageUrl>
+   <vulnerabilityName>CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: kind-of:3.2.2
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/kind\-of@.*$</packageUrl>
+   <vulnerabilityName>CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: kind-of:4.0.0
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/kind\-of@.*$</packageUrl>
+   <vulnerabilityName>CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: ms:"2.0.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/ms@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: qs:"6.7.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/qs@.*$</packageUrl>
+   <vulnerabilityName>CVE-2014-7191</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: qs:"6.7.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/qs@.*$</packageUrl>
+   <vulnerabilityName>CWE-20: Improper Input Validation</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: qs:"6.7.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/qs@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: qs:"6.7.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/qs@.*$</packageUrl>
+   <vulnerabilityName>Prototype override protection bypass</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: ssri:"7.1.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/ssri@.*$</packageUrl>
+   <vulnerabilityName>CVE-2018-7651</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: ssri:"7.1.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/ssri@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: tough-cookie:"2.5.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/tough\-cookie@.*$</packageUrl>
+   <vulnerabilityName>CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')</vulnerabilityName>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: ms:"2.0.0"
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/ms@.*$</packageUrl>
+   <vulnerabilityName>CVE-2015-8315</vulnerabilityName>
 </suppress>
 
 </suppressions>

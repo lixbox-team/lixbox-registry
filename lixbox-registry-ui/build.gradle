@@ -29,6 +29,22 @@ project(':lixbox-registry-ui'){
         testCompile group: 'io.quarkus', name: 'quarkus-rest-client', version: quarkusVersion
     }
     
+    jar{
+       duplicatesStrategy = DuplicatesStrategy.INCLUDE
+       from('dist') {
+          include '**/*.*'
+            into 'META-INF/resources'
+       }
+   
+       manifest {
+            attributes(
+                "Implementation-Title": project.name, 
+                "Implementation-Version": archiveVersion, 
+                "Implementation-Timestamp": new Date()
+            )
+        }
+    }
+    
     eclipse{
         wtp{
             facet {
@@ -43,22 +59,6 @@ project(':lixbox-registry-ui'){
            property "sonar.projectName", "${project.name}"
            property "sonar.sources","src/main"
            property "sonar.tests","src/test, src/integTest"
-        }
-    }
-    
-    jar{
-       duplicatesStrategy = DuplicatesStrategy.INCLUDE
-       from('dist') {
-          include '**/*.*'
-            into 'META-INF/resources'
-       }
-   
-       manifest {
-            attributes(
-                "Implementation-Title": project.name, 
-                "Implementation-Version": archiveVersion, 
-                "Implementation-Timestamp": new Date()
-            )
         }
     }
 

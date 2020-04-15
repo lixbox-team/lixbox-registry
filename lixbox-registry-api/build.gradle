@@ -25,6 +25,7 @@ project(":lixbox-registry-api"){
         compile group: 'io.quarkus', name: 'quarkus-resteasy'
         compile group: 'io.quarkus', name: 'quarkus-resteasy-jackson'
         compile group: 'io.quarkus', name: 'quarkus-rest-client'
+        compile group: 'io.quarkus', name: 'quarkus-smallrye-openapi'
 
         //divers
         compile group: 'redis.clients', name: 'jedis', version: '3.2.0'
@@ -34,6 +35,23 @@ project(":lixbox-registry-api"){
         testCompile group:'io.quarkus', name: 'quarkus-junit5'
         testCompile group:'io.rest-assured', name: 'rest-assured', version: '3.3.0'
         testCompile group: 'io.quarkus', name: 'quarkus-rest-client', version: quarkusVersion
+    }
+    
+    jar{
+       duplicatesStrategy = DuplicatesStrategy.INCLUDE
+       from('dist') {
+          include '**/*.*'
+            into 'META-INF/resources'
+       }
+   
+
+       manifest {
+            attributes(
+                "Implementation-Title": project.name, 
+                "Implementation-Version": archiveVersion, 
+                "Implementation-Timestamp": new Date()
+            )
+        }
     }
     
     eclipse{
@@ -54,22 +72,6 @@ project(":lixbox-registry-api"){
            property "sonar.projectName", "${project.name}"
            property "sonar.sources","src/main"
            property "sonar.tests","src/test, src/integTest"
-        }
-    }
-    
-    jar{
-       duplicatesStrategy = DuplicatesStrategy.INCLUDE
-       from('dist') {
-          include '**/*.*'
-            into 'META-INF/resources'
-       }
-   
-       manifest {
-            attributes(
-                "Implementation-Title": project.name, 
-                "Implementation-Version": archiveVersion, 
-                "Implementation-Timestamp": new Date()
-            )
         }
     }
 

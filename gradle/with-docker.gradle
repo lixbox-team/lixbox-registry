@@ -4,4 +4,11 @@ allprojects {
             logger.info("This task build and push the prject docker's images");
         }
     }
+    
+    
+    task removeTestContainers(group: "docker", description: "Remove all test's containers"){
+        doLast {
+            logger.info("This task remove all test's containers");
+        }
+    }
 }

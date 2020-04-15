@@ -12,7 +12,7 @@ def onFailed(e) {
     def title = JOB_NAME+' - Build # '+BUILD_NUMBER+' - '+BUILD_STATUS+'!';
     def msg = 'The '+JOB_NAME+' - Build # '+BUILD_NUMBER+' is '+BUILD_STATUS+'. \n Check console output at '+BUILD_URL+' to view the results or check the project site at '+projectSiteUri;   
     mattermostSend channel: channel, color: '#dd4040', endpoint: mattermostUri, message: msg, text: title
-    sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew --stacktrace removeRedisContainer'
+    sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew --stacktrace removeTestContainers'
 }
     
 node('slave-gradle-graalvm') {
@@ -42,7 +42,7 @@ node('slave-gradle-graalvm') {
         echo 'Check started'
         try{
             sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew -x buildNative check --stacktrace'
-            sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew --stacktrace removeRedisContainer'            
+            sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew --stacktrace removeTestContainers'            
         }
         catch (e){
 //            sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew site uploadSite --stacktrace'

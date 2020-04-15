@@ -153,4 +153,5 @@ project(":lixbox-registry-api"){
     tasks.startRedisContainer.dependsOn(tasks.createRedisContainer);
     tasks.test.dependsOn(tasks.startRedisContainer);
     tasks.quarkusDev.dependsOn(tasks.startRedisContainer);
+    tasks.removeTestContainers.dependsOn(tasks.removeRedisContainer);
 }

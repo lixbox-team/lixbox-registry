@@ -11,5 +11,5 @@ pluginManagement {
 rootProject.name = 'lixbox-registry'
 
 /** Projet importé */
-include 'lixbox-registry-api'
+include 'lixbox-registry-core'
 include 'lixbox-registry-ui'

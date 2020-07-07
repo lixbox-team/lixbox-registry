@@ -24,7 +24,6 @@
 package fr.lixbox.service.registry;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.jupiter.api.Test;
 

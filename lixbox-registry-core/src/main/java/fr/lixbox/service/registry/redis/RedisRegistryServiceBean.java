@@ -3,7 +3,7 @@
  *                           FRAMEWORK Lixbox
  *                          ==================
  *      
- * This file is part of lixbox-service registry.
+ *    This file is part of lixbox-service registry.
  *
  *    lixbox-iam is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -46,10 +46,11 @@ import fr.lixbox.common.util.CodeVersionUtil;
 import fr.lixbox.common.util.CollectionUtil;
 import fr.lixbox.common.util.StringUtil;
 import fr.lixbox.io.json.JsonUtil;
+import fr.lixbox.service.common.model.Instance;
 import fr.lixbox.service.common.util.ServiceUtil;
 import fr.lixbox.service.registry.RegistryService;
 import fr.lixbox.service.registry.model.ServiceEntry;
-import fr.lixbox.service.registry.model.ServiceInstance;
+import fr.lixbox.service.registry.model.ServiceType;
 import fr.lixbox.service.registry.model.health.Check;
 import fr.lixbox.service.registry.model.health.ServiceState;
 import fr.lixbox.service.registry.model.health.ServiceStatus;
@@ -151,7 +152,7 @@ public class RedisRegistryServiceBean implements RegistryService
 
 
     @Override
-    public boolean registerService(String name,  String version,  String uri)
+    public boolean registerService(String name,  String version, ServiceType type, String uri)
     {
         boolean result = false;
         try(
@@ -168,10 +169,11 @@ public class RedisRegistryServiceBean implements RegistryService
                 serviceEntry = new ServiceEntry();
                 serviceEntry.setName(name);
                 serviceEntry.setVersion(version);
+                serviceEntry.setType(type);
             }
             if (!serviceEntry.containsInstanceUri(uri))
             {
-                serviceEntry.getInstances().add(new ServiceInstance(uri));
+                serviceEntry.getInstances().add(new Instance(uri));
                 redisClient.set(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry,false));       
             }            
             result = true;
@@ -401,7 +403,7 @@ public class RedisRegistryServiceBean implements RegistryService
     
     private void checkEntry(ServiceEntry entry)
     {
-        for (ServiceInstance servInst:entry.getInstances())
+        for (Instance servInst:entry.getInstances())
         {
             servInst.setLiveState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));
             servInst.setReadyState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));

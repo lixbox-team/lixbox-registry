@@ -47,9 +47,9 @@ public class ConfigurationServlet extends HttpServlet
     
     
     @ConfigProperty(name="registry.api.url")     
-    private String registryApi;
+    String registryApi;
     @ConfigProperty(name="iam.api.url") 
-    private String iamApi;
+    String iamApi;
 
     
 

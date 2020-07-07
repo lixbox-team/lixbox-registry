@@ -15,7 +15,7 @@ def onFailed(e) {
     sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew --stacktrace removeTestContainers'
 }
     
-node('slave-gradle-graalvm') {
+node('slave-gradle-jdk8') {
     stage('Init'){
         echo 'Initialisation started'
         try{

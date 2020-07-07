@@ -129,7 +129,7 @@ node('slave-gradle-jdk8') {
                 mattermostSend channel: channel, color: 'rgb(184, 255, 184)', endpoint: mattermostUri, message: msg, text: title
             }
             catch (e){
-                sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew site uploadSite --stacktrace'
+//                sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew site uploadSite --stacktrace'
                 onFailed(e);
                 error e
             }

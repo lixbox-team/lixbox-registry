@@ -190,26 +190,31 @@ export default {
     getRegistryService() {
       return new RegistryService(this.registryUrl);
     },
-    async getConfiguration() {
+    getConfiguration() {
       axios
         .get("/configuration")
-        .then(response => response.data)
+        .then(reponse => reponse.data)
         .then(data => {
           this.registryUrl = data.registry;
+          this.getEntryKeys();
         });
     },
     initialize() {
       this.getConfiguration();
-      this.getEntryKeys();
     },
+
     addServiceInstance() {
       this.selected.instances.push({"uri":""});
     },
     getEntryKeys() {
+      alert(this.registryUrl);
       this.getRegistryService()
         .getEntryKeys()
         .then(data => {
           this.entryKeys = data;
+        })
+        .catch(error=>{
+          alert(JSON.stringify(error));
         });
     },
     select(entry) {

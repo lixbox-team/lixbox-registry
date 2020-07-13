@@ -173,7 +173,7 @@ export default {
     entryKeys: [],
     selected: null,
     serviceEntryHeaders: [{ text: "Adresse", value: "uri" }],
-    serviceTypes: ["TCP", "HTTP", "MICRO_PROFILE"],
+    serviceTypes: ["MANUAL","TCP", "HTTP", "MICRO_PROFILE"],
     dialog: false,
     new: false,
     loading: true,
@@ -192,7 +192,7 @@ export default {
     },
     getConfiguration() {
       axios
-        .get("/configuration")
+        .get(process.env.VUE_APP_CONFIGURATION_URI)
         .then(reponse => reponse.data)
         .then(data => {
           this.registryUrl = data.registry;

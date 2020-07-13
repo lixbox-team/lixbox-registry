@@ -96,7 +96,6 @@ public class RedisRegistryServiceBean implements RegistryService
     @Override
     public ServiceState checkReady()
     {
-        LOG.info("redis uri: "+redisUri);
         LOG.debug("Check Health started");
         ServiceState state = new ServiceState();
         
@@ -405,8 +404,8 @@ public class RedisRegistryServiceBean implements RegistryService
     {
         for (Instance servInst:entry.getInstances())
         {
-            servInst.setLiveState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));
-            servInst.setReadyState(ServiceUtil.checkHealth(entry.getType(), servInst.getUri()));
+            servInst.setLiveState(ServiceUtil.checkHealth(entry.getType(), servInst));
+            servInst.setReadyState(ServiceUtil.checkHealth(entry.getType(), servInst));
             servInst.setReady(ServiceStatus.UP.equals(servInst.getReadyState().getStatus()));
             servInst.setLive(ServiceStatus.UP.equals(servInst.getLiveState().getStatus()));
         }

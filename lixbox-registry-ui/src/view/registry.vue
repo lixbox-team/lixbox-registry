@@ -207,7 +207,6 @@ export default {
       this.selected.instances.push({"uri":""});
     },
     getEntryKeys() {
-      alert(this.registryUrl);
       this.getRegistryService()
         .getEntryKeys()
         .then(data => {

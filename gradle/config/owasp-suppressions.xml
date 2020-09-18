@@ -354,6 +354,12 @@
    ]]></notes>
    <packageUrl regex="true">^pkg:npm/ms@.*$</packageUrl>
    <vulnerabilityName>CVE-2015-8315</vulnerabilityName>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: websocket-extensions:0.1.4
+   ]]></notes>
+   <packageUrl regex="true">^pkg:npm/websocket\-extensions@.*$</packageUrl>
+   <vulnerabilityName>CVE-2020-7663</vulnerabilityName>
 </suppress>
 
 </suppressions>

@@ -26,7 +26,7 @@ node('slave-gradle-jdk8') {
         try
         {
             git credentialsId: '8c9e4cf3-1cdf-4de8-9a15-94117eb09ff0', url: gitUri, branch: branchName
-            sh 'chmod -R 755 ${WORKSPACE}'
+//            sh 'chmod -R 755 ${WORKSPACE}'
             sh 'export SOURCE_BUILD_NUMBER=${BUILD_NUMBER} && ${WORKSPACE}/gradlew clean --stacktrace'            
         }
         catch (e){

@@ -73,7 +73,7 @@ public class RedisRegistryServiceBean implements RegistryService
     private static final Log LOG = LogFactory.getLog(RegistryService.class);
     private static final String HEAD_KEYS = "REGISTRY-SERVICE:";
     
-    @ConfigProperty(name="registry.redis.uri") private String redisUri;
+    @ConfigProperty(name="registry.redis.uri") String redisUri;
 
     
     

@@ -46,7 +46,7 @@ public class ConfigurationServlet extends HttpServlet
     private static final Log LOG = LogFactory.getLog(ConfigurationServlet.class);
     
     
-    @ConfigProperty(name="registry.api.url")     
+    @ConfigProperty(name="registry.api.url")
     String registryApi;
     @ConfigProperty(name="iam.api.url") 
     String iamApi;

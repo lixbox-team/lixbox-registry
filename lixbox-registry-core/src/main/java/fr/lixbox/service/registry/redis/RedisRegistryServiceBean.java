@@ -151,7 +151,7 @@ public class RedisRegistryServiceBean implements RegistryService
 
 
     @Override
-    public boolean registerService(String name,  String version, ServiceType type, String uri)
+    public boolean registerService(String name,  String version, ServiceType type, String uri, String endPointUri)
     {
         boolean result = false;
         try(
@@ -169,12 +169,18 @@ public class RedisRegistryServiceBean implements RegistryService
                 serviceEntry.setName(name);
                 serviceEntry.setVersion(version);
                 serviceEntry.setType(type);
+                serviceEntry.setEndpointUri(endPointUri);
+            }
+            if (StringUtil.isNotEmpty(endPointUri) && StringUtil.isEmpty(serviceEntry.getEndpointUri()))
+            {
+                serviceEntry.setEndpointUri(endPointUri);
             }
             if (!serviceEntry.containsInstanceUri(uri))
             {
                 serviceEntry.getInstances().add(new Instance(uri));
-                redisClient.set(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry,false));       
-            }            
+                redisClient.set(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry,false));
+            }
+            redisClient.close();
             result = true;
         }
         catch (Exception e)
@@ -214,6 +220,7 @@ public class RedisRegistryServiceBean implements RegistryService
                 {            
                     redisClient.set(HEAD_KEYS+name+":"+version, serviceEntry.toString());   
                 }
+                redisClient.close();
                 result = true;
             }
         }

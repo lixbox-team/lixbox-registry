@@ -180,7 +180,6 @@ public class RedisRegistryServiceBean implements RegistryService
                 serviceEntry.getInstances().add(new Instance(uri));
                 redisClient.set(HEAD_KEYS+name+":"+version, JsonUtil.transformObjectToJson(serviceEntry,false));
             }
-            redisClient.close();
             result = true;
         }
         catch (Exception e)
@@ -220,7 +219,6 @@ public class RedisRegistryServiceBean implements RegistryService
                 {            
                     redisClient.set(HEAD_KEYS+name+":"+version, serviceEntry.toString());   
                 }
-                redisClient.close();
                 result = true;
             }
         }

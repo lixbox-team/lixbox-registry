@@ -77,7 +77,6 @@ project(':lixbox-registry-ui'){
         inputs.files fileTree('src')
     
         inputs.file 'package.json'
-//        inputs.file 'package-lock.json'
     }
     
     task copyNpm(type: Copy) {
@@ -151,4 +150,10 @@ project(':lixbox-registry-ui'){
     pushProjectImages.dependsOn buildProjectImages
     buildAndPushDockerImages.dependsOn pushProjectImages
     tasks.clean.dependsOn tasks.npmInstall
+}
+import java.nio.file.Paths;
+project.afterEvaluate {
+    def rc = Paths.get(project.buildDir.canonicalPath, '.npmrc').toFile()
+    if(rc.exists()) rc.delete()
+    rc << "strict-ssl=false\n"
 }

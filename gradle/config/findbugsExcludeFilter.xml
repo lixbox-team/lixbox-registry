@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
-<FindBugsFilter>	
+<FindBugsFilter>
+    <Match>
+        <Bug code="EI" />
+    </Match>  
+    <Match>
+        <Bug code="EI2" />
+    </Match>  
     <Match>
         <Bug code="REC" />
     </Match>

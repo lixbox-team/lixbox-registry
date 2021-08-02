@@ -7,7 +7,7 @@ desc_project{
     version{
         majorVersion=11
         mediumVersion=1
-        minorVersion=0
+        minorVersion=1
     }
     artefact{
         group="fr.lixbox.lixbox-registry"
@@ -21,7 +21,6 @@ desc_project{
 	   ui_context="/registry/ui"
 	   ui="/registry/ui" 
 	}
-
 	pic{
 	    channel="lixbox"
 		git{

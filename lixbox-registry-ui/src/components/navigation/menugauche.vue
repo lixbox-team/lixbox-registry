@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer expand-on-hover :mini-variant="isCollapsed()" v-model="value" app clipped color="#FEFEFA">
+  <v-navigation-drawer expand-on-hover :mini-variant="isCollapsed()" v-model="cValue" app clipped color="#FEFEFA">
     <v-list dense>
       <v-list-item :to="{ name: 'registry' }" active-class>
         <v-list-item-action>
@@ -26,6 +26,11 @@ export default {
   name: "menuGauche",
   inheritAttrs: false,
   props: ["label", "value"],
+  computed: {
+    cValue() {
+      return this.value;
+    }
+  },
   methods: {
     isCollapsed () {
       return true;

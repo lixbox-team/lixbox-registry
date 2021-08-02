@@ -9,32 +9,30 @@ project(":lixbox-registry-core"){
         mavenCentral()
     }
     dependencies {
-        compile enforcedPlatform("io.quarkus:quarkus-bom:${quarkusVersion}")
-        
         //project
 //        sans objet
         
         //lixbox
-        compile(group: 'fr.lixbox.lixbox-common', name: 'lixbox-core', version: version_lixbox_common)
-        compile(group: 'fr.lixbox.lixbox-io', name: 'lixbox-json', version: version_lixbox_io)
-        compile(group: 'fr.lixbox.lixbox-service', name: 'lixbox-microservice-common', version: version_lixbox_service){ 
+        api(group: 'fr.lixbox.lixbox-common', name: 'lixbox-core', version: version_lixbox_common)
+        api(group: 'fr.lixbox.lixbox-io', name: 'lixbox-json', version: version_lixbox_io)
+        api(group: 'fr.lixbox.lixbox-service', name: 'lixbox-microservice-common', version: version_lixbox_service){ 
             exclude(group:'fr.lixbox')
         }
         
         //quarkus
-        compile group: 'io.quarkus', name: 'quarkus-resteasy'
-        compile group: 'io.quarkus', name: 'quarkus-resteasy-jackson'
-        compile group: 'io.quarkus', name: 'quarkus-rest-client'
-        compile group: 'io.quarkus', name: 'quarkus-smallrye-openapi'
-        compile group: 'io.quarkus', name: 'quarkus-logging-gelf', version:quarkusVersion
+        implementation group: 'io.quarkus', name: 'quarkus-resteasy', version:quarkusVersion
+        implementation group: 'io.quarkus', name: 'quarkus-resteasy-jackson', version:quarkusVersion
+        implementation group: 'io.quarkus', name: 'quarkus-rest-client', version:quarkusVersion
+        implementation group: 'io.quarkus', name: 'quarkus-smallrye-openapi', version:quarkusVersion
+        implementation group: 'io.quarkus', name: 'quarkus-logging-gelf', version:quarkusVersion
 
         //divers
-        compile group: 'redis.clients', name: 'jedis', version: '3.3.0'
+        implementation group: 'redis.clients', name: 'jedis', version: '3.3.0'
         
         //TEST
-        testCompile group:'io.quarkus', name: 'quarkus-junit5'
-        testCompile group:'io.rest-assured', name: 'rest-assured', version: '3.3.0'
-        testCompile group: 'io.quarkus', name: 'quarkus-rest-client', version: quarkusVersion
+        testImplementation group:'io.quarkus', name: 'quarkus-junit5'
+        testImplementation group:'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+        testImplementation group: 'io.quarkus', name: 'quarkus-rest-client', version: quarkusVersion
     }
     
     jar{

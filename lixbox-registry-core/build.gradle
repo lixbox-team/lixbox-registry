@@ -1,7 +1,7 @@
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
 plugins {
-    id 'com.bmuschko.docker-remote-api' version '7.1.0'
+    id 'com.bmuschko.docker-remote-api' version "${docker_remote_plugins}"
     id 'io.quarkus' version "${quarkus_gradle_plugins}"
 }
 project(":lixbox-registry-core"){

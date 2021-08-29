@@ -48,8 +48,6 @@ public class ConfigurationServlet extends HttpServlet
     
     @ConfigProperty(name="registry.api.url")
     String registryApi;
-    @ConfigProperty(name="iam.api.url") 
-    String iamApi;
 
     
 
@@ -58,7 +56,6 @@ public class ConfigurationServlet extends HttpServlet
     {
         Map<String,String> config = new HashMap<>();
         config.put("registry", registryApi);
-        config.put("iam", iamApi);
         try
         {
             response.getWriter().print(JsonUtil.transformObjectToJson(config,false));

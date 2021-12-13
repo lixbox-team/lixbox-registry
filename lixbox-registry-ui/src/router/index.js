@@ -5,6 +5,7 @@ import Registry from '@/view/registry'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { 
         path: '/', redirect: { name: 'registry' }},

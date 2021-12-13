@@ -662,4 +662,260 @@
    <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-resteasy\-jackson\-deployment@.*$</packageUrl>
    <cpe>cpe:/a:redhat:resteasy</cpe>
 </suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: arc-processor-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus\.arc/arc\-processor@.*$</packageUrl>
+   <cpe>cpe:/a:arc_project:arc</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: arc-processor-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus\.arc/arc\-processor@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: jedis-3.3.0.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/redis\.clients/jedis@.*$</packageUrl>
+   <cpe>cpe:/a:redis:redis</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: netty-codec-haproxy-4.1.65.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.netty/netty\-codec\-haproxy@.*$</packageUrl>
+   <cpe>cpe:/a:netty:netty</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-apache-httpclient-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-apache\-httpclient@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-arc-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-arc\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:arc_project:arc</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-arc-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-arc\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-bootstrap-app-model-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-bootstrap\-app\-model@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-bootstrap-core-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-bootstrap\-core@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-bootstrap-gradle-resolver-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-bootstrap\-gradle\-resolver@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-bootstrap-maven-resolver-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-bootstrap\-maven\-resolver@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-builder-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-builder@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-class-change-agent-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-class\-change\-agent@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-core-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-core\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-devtools-utilities-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-devtools\-utilities@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-jackson-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-jackson\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-jsonp-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-jsonp@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-junit5-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-junit5@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-apache-httpclient-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-apache\-httpclient@.*$</packageUrl>
+   <cpe>cpe:/a:apache:httpclient</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-mutiny-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-mutiny@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-security-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-security\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-smallrye-context-propagation-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-smallrye\-context\-propagation@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-smallrye-openapi-common-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-smallrye\-openapi\-common\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-smallrye-openapi-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-smallrye\-openapi\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-test-common-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-test\-common@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-undertow-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-undertow\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-undertow-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-undertow\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:redhat:undertow</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-vertx-core-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-vertx\-core\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-vertx-http-dev-console-runtime-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-vertx\-http\-dev\-console\-runtime\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-vertx-http-dev-console-spi-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-vertx\-http\-dev\-console\-spi@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: qute-core-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus\.qute/qute\-core@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-jsonp-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-jsonp\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-netty-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-netty\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-jackson-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-jackson\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-swagger-ui-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-swagger\-ui\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-vertx-http-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-vertx\-http\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress>
+<suppress>
+   <notes><![CDATA[
+   file name: quarkus-rest-client-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-rest\-client\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-logging-gelf-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-logging\-gelf\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-rest-client-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-rest\-client\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:redhat:resteasy</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-rest-client-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-rest\-client\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:redhat:resteasy</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-smallrye-openapi-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-smallrye\-openapi\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress><suppress>
+   <notes><![CDATA[
+   file name: quarkus-smallrye-context-propagation-deployment-2.2.0.Final.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-smallrye\-context\-propagation\-deployment@.*$</packageUrl>
+   <cpe>cpe:/a:quarkus:quarkus</cpe>
+</suppress>
+
+
 </suppressions>

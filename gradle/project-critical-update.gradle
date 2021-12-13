@@ -5,9 +5,14 @@ subprojects {
             if (details.requested.group.contains('org.apache.httpcomponents') && 
                     details.requested.name.contains('httpclient') &&
                     details.requested.version.contains('4.5.12')) {
-                    println "correction cve-org.apache.httpcomponents-httpclient-4.5.12"
                     details.useVersion '4.5.13'
                     details.because 'critical cve in 4.5.12'
+            }
+            if (details.requested.group.contains('com.thoughtworks.xstream') && 
+                    details.requested.name.contains('xstream') &&
+                    details.requested.version.contains('1.4.17')) {
+                    details.useVersion '1.4.18'
+                    details.because 'critical cve in 1.4.17'
             }
         }
     }

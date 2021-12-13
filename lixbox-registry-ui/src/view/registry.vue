@@ -14,6 +14,7 @@
     <v-row class="margin-10">
       <v-col md="3">
         <registryTree
+          cssClass="tree"
           :opens="['global','service', 'api']"
           :items="entryKeys"
           @update:active="select"
@@ -94,7 +95,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="item in selected.instances" :key="item.live">
+                      <tr v-for="(item, index) in selected.instances" :key="item.live">
                         <td>
                           <v-text-field
                             :label="$t('registry.service.instance.uri')"
@@ -169,7 +170,7 @@ export default {
   },
   name: "RegistryView",
   data: () => ({
-    registryUrl: "http://localhost:18100/registry/api/1.0",
+    registryUrl: process.env.VUE_APP_REGISTRY_URI,
     entryKeys: [],
     selected: null,
     serviceEntryHeaders: [{ text: "Adresse", value: "uri" }],
@@ -201,6 +202,7 @@ export default {
     },
     initialize() {
       this.getConfiguration();
+      this.getEntryKeys();
     },
 
     addServiceInstance() {
@@ -294,5 +296,12 @@ export default {
 }
 .margin-10 {
   margin: 1rem 1rem 0 1rem;
+}
+</style>
+<style>
+.tree {
+    height: 80vh;
+    position: absolute;
+    overflow-y: auto;
 }
 </style>

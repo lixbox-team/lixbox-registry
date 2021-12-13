@@ -12,7 +12,7 @@
         clear-icon="mdi-close-circle-outline"
       ></v-text-field>
     </v-sheet>
-    <v-card-text>
+    <v-card-text :class="this.cssClass">
       <v-treeview
         :items="parsedItems"
         :return-object="returnObject"
@@ -35,7 +35,7 @@
 <script>
 export default {
   name: "registryTree",
-  props: ["opens", "items"],
+  props: ["cssClass", "opens", "items"],
   data: () => ({
     active: [],
     cParsedItems: [],

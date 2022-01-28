@@ -196,13 +196,15 @@ export default {
         .get(process.env.VUE_APP_CONFIGURATION_URI)
         .then(reponse => reponse.data)
         .then(data => {
-          this.registryUrl = data.registry;
+          this.registryUrl = data.registry.api.uri;
+          this.getEntryKeys();
+        })
+        .catch(error =>{
           this.getEntryKeys();
         });
     },
     initialize() {
       this.getConfiguration();
-      this.getEntryKeys();
     },
 
     addServiceInstance() {

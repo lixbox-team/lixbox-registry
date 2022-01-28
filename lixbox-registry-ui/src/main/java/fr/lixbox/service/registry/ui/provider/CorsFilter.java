@@ -21,7 +21,7 @@
  *   @AUTHOR Lixbox-team
  *
  ******************************************************************************/
-package fr.lixbox.service.registry.provider;
+package fr.lixbox.service.registry.ui.provider;
 
 import java.io.IOException;
 

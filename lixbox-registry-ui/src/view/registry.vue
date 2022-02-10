@@ -194,9 +194,8 @@ export default {
     getConfiguration() {
       axios
         .get(process.env.VUE_APP_CONFIGURATION_URI)
-        .then(reponse => reponse.data)
-        .then(data => {
-          this.registryUrl = data.registry.api.uri;
+        .then(reponse => {
+          this.registryUrl = reponse.data.registryApiUri;
           this.getEntryKeys();
         })
         .catch(error =>{
@@ -217,7 +216,7 @@ export default {
           this.entryKeys = data;
         })
         .catch(error=>{
-          alert(JSON.stringify(error));
+          console.log(JSON.stringify(error));
         });
     },
     select(entry) {

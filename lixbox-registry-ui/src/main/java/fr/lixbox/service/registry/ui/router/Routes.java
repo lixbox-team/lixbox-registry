@@ -61,7 +61,7 @@ public class Routes implements Serializable
     {
         String response = "";
         Map<String,String> config = new HashMap<>();
-        config.put("registry.api.uri", registryApi);
+        config.put("registryApiUri", registryApi);
         response = JsonUtil.transformObjectToJson(config,false);
         
         rc.response()
